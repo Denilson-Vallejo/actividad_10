@@ -17,16 +17,22 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(545, 426)
+        MainWindow.resize(534, 471)
         self.actionAbrir = QAction(MainWindow)
         self.actionAbrir.setObjectName(u"actionAbrir")
         self.actionGuardar = QAction(MainWindow)
         self.actionGuardar.setObjectName(u"actionGuardar")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.gridLayout_2 = QGridLayout(self.centralwidget)
+        self.gridLayout_3 = QGridLayout(self.centralwidget)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.tabWidget = QTabWidget(self.centralwidget)
+        self.tabWidget.setObjectName(u"tabWidget")
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.gridLayout_2 = QGridLayout(self.tab)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.groupBox = QGroupBox(self.centralwidget)
+        self.groupBox = QGroupBox(self.tab)
         self.groupBox.setObjectName(u"groupBox")
         self.gridLayout = QGridLayout(self.groupBox)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -151,17 +157,46 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.agregar_final_pushButton, 11, 2, 1, 1)
 
 
-        self.gridLayout_2.addWidget(self.groupBox, 0, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.groupBox, 0, 0, 1, 1)
 
-        self.salida = QPlainTextEdit(self.centralwidget)
+        self.salida = QPlainTextEdit(self.tab)
         self.salida.setObjectName(u"salida")
 
-        self.gridLayout_2.addWidget(self.salida, 0, 2, 1, 1)
+        self.gridLayout_2.addWidget(self.salida, 0, 1, 1, 1)
+
+        self.tabWidget.addTab(self.tab, "")
+        self.tab_2 = QWidget()
+        self.tab_2.setObjectName(u"tab_2")
+        self.gridLayout_4 = QGridLayout(self.tab_2)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.buscar_lineEdit = QLineEdit(self.tab_2)
+        self.buscar_lineEdit.setObjectName(u"buscar_lineEdit")
+
+        self.gridLayout_4.addWidget(self.buscar_lineEdit, 1, 0, 1, 1)
+
+        self.buscar_pushButton = QPushButton(self.tab_2)
+        self.buscar_pushButton.setObjectName(u"buscar_pushButton")
+
+        self.gridLayout_4.addWidget(self.buscar_pushButton, 1, 1, 1, 1)
+
+        self.mostrar_pushButton_2 = QPushButton(self.tab_2)
+        self.mostrar_pushButton_2.setObjectName(u"mostrar_pushButton_2")
+
+        self.gridLayout_4.addWidget(self.mostrar_pushButton_2, 1, 2, 1, 1)
+
+        self.tabla_tableWidget = QTableWidget(self.tab_2)
+        self.tabla_tableWidget.setObjectName(u"tabla_tableWidget")
+
+        self.gridLayout_4.addWidget(self.tabla_tableWidget, 0, 0, 1, 3)
+
+        self.tabWidget.addTab(self.tab_2, "")
+
+        self.gridLayout_3.addWidget(self.tabWidget, 0, 0, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 545, 21))
+        self.menubar.setGeometry(QRect(0, 0, 534, 21))
         self.menuArchivo = QMenu(self.menubar)
         self.menuArchivo.setObjectName(u"menuArchivo")
         MainWindow.setMenuBar(self.menubar)
@@ -174,6 +209,9 @@ class Ui_MainWindow(object):
         self.menuArchivo.addAction(self.actionGuardar)
 
         self.retranslateUi(MainWindow)
+
+        self.tabWidget.setCurrentIndex(1)
+
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
@@ -202,6 +240,11 @@ class Ui_MainWindow(object):
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Destino en y:", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Red:", None))
         self.agregar_final_pushButton.setText(QCoreApplication.translate("MainWindow", u"Agregar al final", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Agregar", None))
+        self.buscar_lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Id de la part\u00edcula", None))
+        self.buscar_pushButton.setText(QCoreApplication.translate("MainWindow", u"Buscar", None))
+        self.mostrar_pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Mostrar", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Tabla", None))
         self.menuArchivo.setTitle(QCoreApplication.translate("MainWindow", u"Archivo", None))
     # retranslateUi
 
