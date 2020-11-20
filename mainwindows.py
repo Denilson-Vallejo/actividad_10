@@ -17,23 +17,43 @@ class MainWindow(QMainWindow):
         self.ui.agregar_final_pushButton.clicked.connect(self.click_agregar_final)
         self.ui.agregar_inicio_pushButton.clicked.connect(self.click_agregar_inicio)
         self.ui.mostrar_pushButton.clicked.connect(self.click_mostrar)
+        self.ui.orden_id_pushButton.clicked.connect(self.ordenar_por_id)
+        self.ui.orden_velocidad_pushButton.clicked.connect(self.ordenar_por_velocidad)
+        self.ui.orden_distancia_pushButton.clicked.connect(self.ordenar_por_distancia)
+
         self.ui.actionAbrir.triggered.connect(self.action_abrir_archivo)
         self.ui.actionGuardar.triggered.connect(self.action_guardar_archivo)
 
         self.ui.mostrar_pushButton_2.clicked.connect(self.mostrar_tabla)
         self.ui.buscar_pushButton.clicked.connect(self.buscar_tabla)
+        self.ui.pushButton_orden_id_tabla.clicked.connect(self.ordenar_por_id)
+        self.ui.pushButton_orden_velocidad_tabla.clicked.connect(self.ordenar_por_velocidad)
+        self.ui.pushButton_orden_distancia_tabla.clicked.connect(self.ordenar_por_distancia)
 
         self.ui.dibujar.clicked.connect(self.dibujar)
         self.ui.limpiar.clicked.connect(self.limpiar)
 
         self.scene = QGraphicsScene()
         self.ui.graphicsView.setScene(self.scene)
+    
 
     def wheelEvent(self, event):
         if event.delta() > 0:
             self.ui.graphicsView.scale(1.2, 1.2)
         else:
             self.ui.graphicsView.scale(0.8, 0.8)
+
+    @Slot() 
+    def ordenar_por_id(self):
+        self.gestor_particulas.orden_por_id()
+
+    @Slot() 
+    def ordenar_por_velocidad(self):
+        self.gestor_particulas.orden_por_velocidad()
+    
+    @Slot()
+    def ordenar_por_distancia(self):
+        self.gestor_particulas.orden_por_distancia()
 
     @Slot()
     def dibujar(self):
