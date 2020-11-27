@@ -6,6 +6,8 @@ from actividad_9.algoritmos import distancia_euclidiana
 from actividad_9.gestion_particulas import Gestor_Particulas
 from actividad_9.particula import Particula
 from random import randint
+from pprint import pprint
+from pprint import pformat
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -60,7 +62,21 @@ class MainWindow(QMainWindow):
         pen = QPen()
         pen.setWidth(2)
 
+        grafo = {}
+
         for particula in self.gestor_particulas:
+            A = (particula.origen_x, particula.origen_y)
+            B = (particula.destino_x, particula.destino_y)
+            C = round(particula.distancia, 2)
+            
+            if A in grafo:
+                grafo[A].append((B, C))
+            else:
+                grafo[A] = [(B , C)]
+            if B in grafo:
+                grafo[B].append((B, C))
+            else:
+                grafo[B] = [(A, C)]
             r = particula.red
             g = particula.green
             b = particula.blue
@@ -76,6 +92,12 @@ class MainWindow(QMainWindow):
             self.scene.addEllipse(origen_x, origen_y, 3, 3, pen)
             self.scene.addEllipse(destino_x, destino_y, 3, 3, pen)
             self.scene.addLine(origen_x, origen_y, destino_x, destino_y, pen)
+        
+        self.ui.mostrar_aristas_plainText.clear()
+        self.ui.mostrar_aristas_plainText.insertPlainText(str(self.gestor_particulas))
+        a = pformat(grafo, width=40, indent=1)
+        self.ui.mostrar_aristas_plainText.insertPlainText(a)
+        pprint(grafo, width=40, indent=1)
 
     @Slot()
     def limpiar(self):
