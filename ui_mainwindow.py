@@ -236,17 +236,49 @@ class Ui_MainWindow(object):
         self.mostrar_aristas_plainText = QPlainTextEdit(self.groupBox_3)
         self.mostrar_aristas_plainText.setObjectName(u"mostrar_aristas_plainText")
 
-        self.gridLayout_5.addWidget(self.mostrar_aristas_plainText, 0, 0, 1, 1)
+        self.gridLayout_5.addWidget(self.mostrar_aristas_plainText, 0, 0, 1, 2)
 
-        self.dibujar = QPushButton(self.groupBox_3)
-        self.dibujar.setObjectName(u"dibujar")
+        self.label_11 = QLabel(self.groupBox_3)
+        self.label_11.setObjectName(u"label_11")
 
-        self.gridLayout_5.addWidget(self.dibujar, 1, 0, 1, 1)
+        self.gridLayout_5.addWidget(self.label_11, 3, 0, 1, 1)
+
+        self.label_12 = QLabel(self.groupBox_3)
+        self.label_12.setObjectName(u"label_12")
+
+        self.gridLayout_5.addWidget(self.label_12, 4, 0, 1, 1)
 
         self.limpiar = QPushButton(self.groupBox_3)
         self.limpiar.setObjectName(u"limpiar")
 
-        self.gridLayout_5.addWidget(self.limpiar, 2, 0, 1, 1)
+        self.gridLayout_5.addWidget(self.limpiar, 2, 0, 1, 2)
+
+        self.dibujar = QPushButton(self.groupBox_3)
+        self.dibujar.setObjectName(u"dibujar")
+
+        self.gridLayout_5.addWidget(self.dibujar, 1, 0, 1, 2)
+
+        self.origen_y_bus = QSpinBox(self.groupBox_3)
+        self.origen_y_bus.setObjectName(u"origen_y_bus")
+        self.origen_y_bus.setMaximum(500)
+
+        self.gridLayout_5.addWidget(self.origen_y_bus, 4, 1, 1, 1)
+
+        self.origen_x_bus = QSpinBox(self.groupBox_3)
+        self.origen_x_bus.setObjectName(u"origen_x_bus")
+        self.origen_x_bus.setMaximum(500)
+
+        self.gridLayout_5.addWidget(self.origen_x_bus, 3, 1, 1, 1)
+
+        self.amplitud_pushButton = QPushButton(self.groupBox_3)
+        self.amplitud_pushButton.setObjectName(u"amplitud_pushButton")
+
+        self.gridLayout_5.addWidget(self.amplitud_pushButton, 5, 1, 1, 1)
+
+        self.profundidad_pushButton = QPushButton(self.groupBox_3)
+        self.profundidad_pushButton.setObjectName(u"profundidad_pushButton")
+
+        self.gridLayout_5.addWidget(self.profundidad_pushButton, 5, 0, 1, 1)
 
 
         self.gridLayout_6.addWidget(self.groupBox_3, 0, 1, 1, 1)
@@ -314,8 +346,12 @@ class Ui_MainWindow(object):
         self.pushButton_orden_distancia_tabla.setText(QCoreApplication.translate("MainWindow", u"Orrdenar por Distancia", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Tabla", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Grafo", None))
-        self.dibujar.setText(QCoreApplication.translate("MainWindow", u"Dibujar", None))
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Origen en x", None))
+        self.label_12.setText(QCoreApplication.translate("MainWindow", u"Origen en y", None))
         self.limpiar.setText(QCoreApplication.translate("MainWindow", u"Limpiar", None))
+        self.dibujar.setText(QCoreApplication.translate("MainWindow", u"Dibujar", None))
+        self.amplitud_pushButton.setText(QCoreApplication.translate("MainWindow", u"Buscar por Amplitud", None))
+        self.profundidad_pushButton.setText(QCoreApplication.translate("MainWindow", u"Buscar por Profundidad", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"Dibujar ", None))
         self.menuArchivo.setTitle(QCoreApplication.translate("MainWindow", u"Archivo", None))
     # retranslateUi

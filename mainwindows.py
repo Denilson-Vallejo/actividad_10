@@ -37,13 +37,97 @@ class MainWindow(QMainWindow):
 
         self.scene = QGraphicsScene()
         self.ui.graphicsView.setScene(self.scene)
-    
+
+        self.ui.profundidad_pushButton.clicked.connect(self.recorrido_profundidad)
+        self.ui.amplitud_pushButton.clicked.connect(self.recorrido_amplitud)
 
     def wheelEvent(self, event):
         if event.delta() > 0:
             self.ui.graphicsView.scale(1.2, 1.2)
         else:
             self.ui.graphicsView.scale(0.8, 0.8)
+    
+    def grafo(self):
+        grafo = {}
+        for particula in self.gestor_particulas:
+            A = (particula.origen_x, particula.origen_y)
+            B = (particula.destino_x, particula.destino_y)
+            C = round(particula.distancia, 2)
+            
+            if A in grafo:
+                grafo[A].append((B, C))
+            else:
+                grafo[A] = [(B , C)]
+            if B in grafo:
+                grafo[B].append((A, C))
+            else:
+                grafo[B] = [(A, C)]
+        return grafo
+
+    @Slot()
+    def recorrido_profundidad(self):
+        grafo = self.grafo()
+        origen = (self.ui.origen_x_bus.value(), self.ui.origen_y_bus.value())
+        rec = self.busqueda_profundidad(grafo, origen)
+        pprint(rec, width=40, indent=1)
+        self.ui.mostrar_aristas_plainText.clear()
+        a = pformat(rec, width=40, indent=1)
+        self.ui.mostrar_aristas_plainText.insertPlainText(a)
+    
+    @Slot()
+    def recorrido_amplitud(self):
+        grafo = self.grafo()
+        origen = (self.ui.origen_x_bus.value(), self.ui.origen_y_bus.value())
+        rec = self.busqueda_amplitud(grafo, origen)
+        pprint(rec, width=40, indent=1)
+        self.ui.mostrar_aristas_plainText.clear()
+        a = pformat(rec, width=40, indent=1)
+        self.ui.mostrar_aristas_plainText.insertPlainText(a)
+
+    def busqueda_profundidad(self, grafo:{}, origen):
+        visitados = []
+        pila = []
+        recorrido = []
+
+        visitados.append(origen)
+        pila.append(origen)
+
+        while len(pila) > 0:
+            vertice = pila[-1]
+            pila.pop()
+            recorrido.append(vertice)
+
+            adyacencia = grafo[vertice]
+            for ady in adyacencia:
+                if not ady[0] in visitados:
+                    visitados.append(ady[0])
+                    pila.append(ady[0])
+        
+        return recorrido
+    
+    def busqueda_amplitud(self, grafo:{}, origen):
+        visitados = []
+        cola = []
+        recorrido = []
+
+        visitados.append(origen)
+        cola.append(origen)
+
+        while len(cola) > 0:
+            vertice = cola[0]
+            cola.pop(0)
+            recorrido.append(vertice)
+
+            adyacencia = grafo[vertice]
+            for ady in adyacencia:
+                if not ady[0] in visitados:
+                    visitados.append(ady[0])
+                    cola.append(ady[0])
+        
+        return recorrido
+
+
+
 
     @Slot() 
     def ordenar_por_id(self):
@@ -74,7 +158,7 @@ class MainWindow(QMainWindow):
             else:
                 grafo[A] = [(B , C)]
             if B in grafo:
-                grafo[B].append((B, C))
+                grafo[B].append((A, C))
             else:
                 grafo[B] = [(A, C)]
             r = particula.red
@@ -94,7 +178,6 @@ class MainWindow(QMainWindow):
             self.scene.addLine(origen_x, origen_y, destino_x, destino_y, pen)
         
         self.ui.mostrar_aristas_plainText.clear()
-        self.ui.mostrar_aristas_plainText.insertPlainText(str(self.gestor_particulas))
         a = pformat(grafo, width=40, indent=1)
         self.ui.mostrar_aristas_plainText.insertPlainText(a)
         pprint(grafo, width=40, indent=1)
